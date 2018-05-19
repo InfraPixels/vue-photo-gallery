@@ -123,5 +123,8 @@
       "@semantic-release/git",
       "@semantic-release/github"
     ]
+  },
+  "dependencies": {
+    "photoswipe": "^4.1.2"
   }
 }
