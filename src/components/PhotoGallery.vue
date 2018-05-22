@@ -17,7 +17,6 @@
         <button class="pswp__button pswp__button--share" title="Share"></button>
         <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
         <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
         <div class="pswp__preloader">
           <div class="pswp__preloader__icn">
             <div class="pswp__preloader__cut">
@@ -46,8 +45,8 @@
 <script>
 import PhotoSwipe from "photoswipe/dist/photoswipe";
 import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default";
-import "photoswipe/dist/photoswipe.css";
-import "photoswipe/dist/default-skin/default-skin.css";
+// import "photoswipe/dist/photoswipe.css";
+// import "photoswipe/dist/default-skin/default-skin.css";
 
 export default {
   name: "PhotoGallery",
@@ -115,7 +114,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

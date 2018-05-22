@@ -56,6 +56,7 @@
     "@semantic-release/github": "^3.0.1",
     "@semantic-release/npm": "^2.6.1",
     "@storybook/vue": "^3.3.3",
+    "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
     "babel-jest": "^22.0.4",
@@ -94,12 +95,12 @@
     "semantic-release": "^15.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+    "travis-deploy-once": "^5.0.0",
     "uglify-es": "^3.3.4",
     "vue": "^2.5.13",
     "vue-jest": "^1.4.0",
     "vue-loader": "^13.6.2",
-    "vue-template-compiler": "^2.5.13",
-    "travis-deploy-once": "^5.0.0"
+    "vue-template-compiler": "^2.5.13"
   },
   "config": {
     "commitizen": {

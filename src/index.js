@@ -1,3 +1,4 @@
+/*eslint no-param-reassign: ["error", { "props": false }]*/
 import PhotoGallery from "./components/PhotoGallery";
 
 let $vm;

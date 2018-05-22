@@ -1,10 +1,22 @@
-import Vue from "vue";
 import PhotoGallery from "../PhotoGallery";
+import { mount, createLocalVue } from "@vue/test-utils";
+
+// create an extended `Vue` constructor
+const localVue = createLocalVue();
+
+localVue.use(PhotoGallery);
 
 describe("PhotoGallery", () => {
-  const Constructor = Vue.extend(PhotoGallery);
-  const vm = new Constructor().$mount();
-  test("should match the snapshot", () => {
-    expect(vm.$el).toMatchSnapshot();
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = mount(PhotoGallery, {
+      localVue
+    });
+  });
+
+  it("test initial rendering", () => {
+    const photoGalleryTemplate = wrapper.html();
+    expect(photoGalleryTemplate).toMatchSnapshot();
   });
 });
