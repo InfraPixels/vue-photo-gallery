@@ -7,7 +7,7 @@ test("Should register all components when installed", () => {
   ModuleLibrary.install(Vue);
 
   // Test if a particular component was registered
-  expect(component).toBeCalledWith("hello-world", expect.any(Object));
+  expect(component).toBeCalledWith("photo-gallery", expect.any(Object));
 
   // Test how many times component got registered
   const totalOfComponents = 1;

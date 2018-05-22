@@ -1,5 +1,5 @@
 <template>
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+<div ref="photoGallery" class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="pswp__bg"></div>
 
   <div class="pswp__scroll-wrap">
@@ -46,66 +46,76 @@
 <script>
 import PhotoSwipe from "photoswipe/dist/photoswipe";
 import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default";
+import "photoswipe/dist/photoswipe.css";
+import "photoswipe/dist/default-skin/default-skin.css";
 
 export default {
-  name: "HelloWorld",
+  name: "PhotoGallery",
+  props: {
+    images: {
+      type: Array
+    },
+    options: {
+      type: Object,
+      default: () => ({})
+    },
+    index: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
-      msg: "Welcome to Your Vue.js Library",
-      categories: [
-        {
-          title: "Essential Links",
-          links: [
-            {
-              label: "Core Docs",
-              href: "https://vuejs.org"
-            },
-            {
-              label: "Forum",
-              href: "https://forum.vuejs.org"
-            },
-            {
-              label: "Community Chat",
-              href: "https://chat.vuejs.org"
-            },
-            {
-              label: "Twitter",
-              href: "https://twitter.com/vuejs"
-            },
-            {
-              label: "Docs for This Template",
-              href: "http://vuejs-templates.github.io/webpack/"
-            }
-          ]
-        },
-        {
-          title: "Ecosystem",
-          links: [
-            {
-              label: "vue-router",
-              href: "https://vuejs.org"
-            },
-            {
-              label: "vuex",
-              href: "https://forum.vuejs.org"
-            },
-            {
-              label: "vue-loader",
-              href: "https://chat.vuejs.org"
-            },
-            {
-              label: "awesome-vue",
-              href: "https://twitter.com/vuejs"
-            }
-          ]
-        }
-      ]
+      PhotoSwipeUI_Default,
+      photoswipe: {}
     };
+  },
+  methods: {
+    open(index, items, options = {}) {
+      const opts = Object.assign(
+        {
+          index: index,
+          getThumbBoundsFn(index) {
+            const thumbnail = document.querySelectorAll(
+              "." + options.thumbnailClass || ".thumb-item"
+            )[index];
+
+            if (!thumbnail) {
+              return undefined;
+            }
+
+            const pageYScroll =
+              window.pageYOffset ||
+              document.documentElement.scrollTop ||
+              document.body.scrollTop ||
+              0;
+
+            const rect = thumbnail.getBoundingClientRect();
+            return {
+              x: rect.left,
+              y: rect.top + pageYScroll,
+              w: rect.width
+            };
+          }
+        },
+        options
+      );
+
+      this.photoswipe = new PhotoSwipe(
+        this.$refs.photoGallery,
+        this.PhotoSwipeUI_Default,
+        items,
+        opts
+      );
+      this.photoswipe.init();
+    },
+    close() {
+      this.photoswipe.close();
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import 'photoswipe/dist/photoswipe.css';
-@import 'photoswipe/dist/default-skin/default-skin.css';
+
 </style>
