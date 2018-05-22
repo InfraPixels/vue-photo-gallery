@@ -1,7 +1,7 @@
 {
   "name": "vue-photo-gallery",
   "description": "A Vue.js 2.0 photo gallery based on PhotoSwipe (no extra dependencies)",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/vue-photo-gallery.common.js",
   "module": "dist/vue-photo-gallery.esm.js",
