@@ -14,12 +14,12 @@
   "author": "Tagore <tagore@dronemapp.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/https://github.com/DroneMapp/vue-photo-gallery.git"
+    "url": "https://github.com/DroneMapp/vue-photo-gallery.git"
   },
   "bugs": {
-    "url": "https://github.com/https://github.com/DroneMapp/vue-photo-gallery/issues"
+    "url": "https://github.com/DroneMapp/vue-photo-gallery/issues"
   },
-  "homepage": "https://github.com/https://github.com/DroneMapp/vue-photo-gallery#readme",
+  "homepage": "https://github.com/DroneMapp/vue-photo-gallery#readme",
   "keywords": [
     "vue",
     "vue-component",
@@ -45,7 +45,8 @@
     "lint": "eslint --ext .js,.vue .",
     "lint:fix": "eslint --ext .js,.vue . --fix",
     "prepublishOnly": "npm run build",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.2",
@@ -90,14 +91,15 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-plugin-vue": "^3.0.0",
     "sass-loader": "^7.0.1",
-    "semantic-release": "^12.2.2",
+    "semantic-release": "^15.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "uglify-es": "^3.3.4",
     "vue": "^2.5.13",
     "vue-jest": "^1.4.0",
     "vue-loader": "^13.6.2",
-    "vue-template-compiler": "^2.5.13"
+    "vue-template-compiler": "^2.5.13",
+    "travis-deploy-once": "^5.0.0"
   },
   "config": {
     "commitizen": {
