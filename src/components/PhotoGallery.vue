@@ -45,8 +45,10 @@
 <script>
 import PhotoSwipe from "photoswipe/dist/photoswipe";
 import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default";
-import "photoswipe/dist/photoswipe.css";
-import "photoswipe/dist/default-skin/default-skin.css";
+require("photoswipe/dist/photoswipe.css");
+require("photoswipe/dist/default-skin/default-skin.css");
+// import "photoswipe/dist/photoswipe.css";
+// import "photoswipe/dist/default-skin/default-skin.css";
 
 export default {
   name: "PhotoGallery",
