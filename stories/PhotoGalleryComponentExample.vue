@@ -1,16 +1,16 @@
 <template>
 <div>
-  <photo-gallery ref="gallery" :images="images" :index="visiblePhoto"></photo-gallery>
-  <a v-for="(image, index) in images" class="preview-img-item" href="#" @click="$photoGallery.open(index, images)">
+  <div class="title">Using as a Component</div>
+  <photo-gallery :images="images" v-model="visiblePhoto"></photo-gallery>
+  <a v-for="(image, index) in images" class="thumb-item" href="#" @click="openGallery(index)">
     <img :src="image.thumbSrc"/>
   </a>
-  <a href="#" @click="openGallery">Open Gallery</a>
 </div>
 </template>
 
 <script>
 export default {
-  name: "PhotoGalleryExample",
+  name: "PhotoGalleryComponentExample",
   data() {
     return {
       images: [
@@ -43,9 +43,16 @@ export default {
     };
   },
   methods: {
-    openGallery() {
-      this.$refs.gallery.open(0, this.images);
+    openGallery(index) {
+      this.visiblePhoto = index;
     }
   }
 };
 </script>
+
+<style lang="css" scoped>
+  .title {
+    margin-bottom: 10px;
+    font-size: 1.3em;
+  }
+</style>

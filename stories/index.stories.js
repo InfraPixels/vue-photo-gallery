@@ -1,8 +1,13 @@
 import { storiesOf } from "@storybook/vue";
-import PhotoGalleryExample from "./PhotoGalleryExample";
+import PhotoGalleryComponentExample from "./PhotoGalleryComponentExample";
+import PhotoGalleryPluginExample from "./PhotoGalleryPluginExample";
 
 // Add more stories here to live develop your components
 
-storiesOf("PhotoGallery", module).add("Simple gallery demo", () => ({
-  render: h => h(PhotoGalleryExample)
-}));
+storiesOf("PhotoGallery", module)
+  .add("Used as component", () => ({
+    render: h => h(PhotoGalleryComponentExample)
+  }))
+  .add("Used as plugin", () => ({
+    render: h => h(PhotoGalleryPluginExample)
+  }));

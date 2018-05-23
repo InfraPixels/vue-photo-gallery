@@ -45,22 +45,24 @@
 <script>
 import PhotoSwipe from "photoswipe/dist/photoswipe";
 import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default";
-// import "photoswipe/dist/photoswipe.css";
-// import "photoswipe/dist/default-skin/default-skin.css";
+import "photoswipe/dist/photoswipe.css";
+import "photoswipe/dist/default-skin/default-skin.css";
 
 export default {
   name: "PhotoGallery",
   props: {
+    value: {
+      type: Number,
+      default: null
+    },
     images: {
       type: Array
     },
     options: {
       type: Object,
-      default: () => ({})
-    },
-    index: {
-      type: Number,
-      default: null
+      default: () => ({
+        shareEl: false
+      })
     }
   },
   data() {
@@ -69,14 +71,24 @@ export default {
       photoswipe: {}
     };
   },
+  watch: {
+    value(newVal, oldVal) {
+      if (oldVal === null && newVal !== null) {
+        this.open();
+      } else if (newVal === null) {
+        this.close();
+      }
+    }
+  },
   methods: {
-    open(index, items, options = {}) {
+    open() {
       const opts = Object.assign(
         {
-          index: index,
+          index: this.value,
           getThumbBoundsFn(index) {
             const thumbnail = document.querySelectorAll(
-              "." + options.thumbnailClass || ".thumb-item"
+              "." + (this.options && this.options.thumbnailClass) ||
+                ".thumb-item"
             )[index];
 
             if (!thumbnail) {
@@ -97,16 +109,57 @@ export default {
             };
           }
         },
-        options
+        this.options
       );
 
       this.photoswipe = new PhotoSwipe(
         this.$refs.photoGallery,
         this.PhotoSwipeUI_Default,
-        items,
+        this.images,
         opts
       );
+
+      this.$emit("open", this.value);
+      this.$emit("input", this.value);
+
+      this.photoswipe.listen("close", () => {
+        this.$emit("input", null);
+        this.$emit("close");
+      });
+
+      this.photoswipe.listen("afterChange", () => {
+        const newIndex = this.getImageIndexBySrc(this.photoswipe.currItem.src);
+        this.$emit("input", newIndex);
+        this.$emit("change", newIndex);
+      });
+
       this.photoswipe.init();
+    },
+    next() {
+      // Go to the next slide
+      if (Object.keys(this.photoswipe).length) {
+        this.photoswipe.next();
+      }
+    },
+    prev() {
+      // Go to the previous slide
+      if (Object.keys(this.photoswipe).length) {
+        pswp.prev();
+      }
+    },
+    goTo(index) {
+      // Go to the previous slide
+      if (Object.keys(this.photoswipe).length) {
+        pswp.goTo(index);
+      }
+    },
+    getImageIndexBySrc(src) {
+      for (let i = 0; i < this.images.length; i++) {
+        if (this.images[i].src === src) {
+          return i;
+        }
+      }
+      return null;
     },
     close() {
       this.photoswipe.close();

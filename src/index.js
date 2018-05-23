@@ -15,8 +15,9 @@ const LibraryModule = {
     }
 
     Vue.$photoGallery = {
-      open(index, items, options) {
-        $vm.open(index, items, options);
+      open(index, images, options) {
+        $vm._props = { value: index, images, options };
+        $vm.open();
       },
       close() {
         $vm.close();

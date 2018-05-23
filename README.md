@@ -11,7 +11,79 @@
 
 > A Vue.js 2.0 photo gallery based on PhotoSwipe (no extra dependencies)
 
-> Generated using [vue-cli-template-library](https://github.com/julon/vue-cli-template-library).
+You can use this photo gallery as component or plugin
+
+## Usage example as component
+
+Control visibility of gallery by setting a variable to v-model. v-model will store current visible photo index, if set to null the gallery will close.
+
+Template
+```html
+<photo-gallery :images="images" v-model="visiblePhoto"></photo-gallery>
+<a v-for="(image, index) in images" class="thumb-item" href="#" @click="visiblePhoto = index">
+  <img :src="image.thumbSrc"/>
+</a>
+```
+
+Script
+```js
+export default {
+  data() {
+    return {
+      images: [
+        {
+          src:"https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg",
+          thumbSrc: "https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg",
+          w: 1600,
+          h: 1600
+        },
+        {
+          src: "https://farm6.staticflickr.com/5591/15008867125_b61960af01_h.jpg",
+          thumbSrc: "https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg",
+          w: 1600,
+          h: 1068
+        }
+      ],
+      visiblePhoto: null
+    };
+  }
+};
+```
+
+## Usage example as plugin
+
+Control visibility of gallery by calling this.$photoGallery.open(index, this.images) and this.$photoGallery.close()
+
+Template
+```html
+<a v-for="(image, index) in images" class="thumb-item" href="#" @click="this.$photoGallery.open(index, this.images)">
+  <img :src="image.thumbSrc"/>
+</a>
+```
+
+Script
+```js
+export default {
+  data() {
+    return {
+      images: [
+        {
+          src:"https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg",
+          thumbSrc: "https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg",
+          w: 1600,
+          h: 1600
+        },
+        {
+          src: "https://farm6.staticflickr.com/5591/15008867125_b61960af01_h.jpg",
+          thumbSrc: "https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg",
+          w: 1600,
+          h: 1068
+        }
+      ]
+    };
+  }
+};
+```
 
 ## Installation
 ```
@@ -26,23 +98,23 @@ When in non-modular environment, vue-photo-gallery will register all the compone
 //
 // You can register a component manually
 //
-import { HelloWorld } from 'vue-photo-gallery';
+import { PhotoGallery } from 'vue-photo-gallery';
 
 export default {
   ...
   components: {
-    HelloWorld
+    PhotoGallery
   },
   ...
 };
 
 //
-// or register the whole module with vue
+// or register the whole module with vue, this will install component globally and will install photoGallery plugin.
 //
-import ModuleLibrary from 'vue-photo-gallery';
+import VuePhotoGallery from 'vue-photo-gallery';
 
 // Install this library
-Vue.use(ModuleLibrary);
+Vue.use(VuePhotoGallery);
 ```
 
 ### CommonJS
@@ -51,12 +123,12 @@ Vue.use(ModuleLibrary);
 // You can register a component manually
 //
 var Vue = require('vue');
-var ModuleLibrary = require('vue-photo-gallery');
+var VuePhotoGallery = require('vue-photo-gallery');
 
 var YourComponent = Vue.extend({
   ...
   components: {
-    'hello-world': ModuleLibrary.HelloWorld
+    'photo-gallery': VuePhotoGallery.PhotoGallery
   },
   ...
 });
@@ -65,10 +137,10 @@ var YourComponent = Vue.extend({
 // or register the whole module with vue
 //
 var Vue = require('vue');
-var ModuleLibrary = require('vue-photo-gallery');
+var VuePhotoGallery = require('vue-photo-gallery');
 
 // Install this library
-Vue.use(ModuleLibrary);
+Vue.use(VuePhotoGallery);
 ```
 
 ### Browser
@@ -82,7 +154,7 @@ Vue.use(ModuleLibrary);
 ### After that, you can use it in your templates:
 
 ```html
-<hello-world></hello-world>
+<photo-gallery></photo-gallery>
 ```
 
 ## Changelog
@@ -92,3 +164,5 @@ See the GitHub [release history](https://github.com/https://github.com/DroneMapp
 ## Contributing
 
 See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
+> Generated using [vue-cli-template-library](https://github.com/julon/vue-cli-template-library).
